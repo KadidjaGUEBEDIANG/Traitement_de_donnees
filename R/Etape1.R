@@ -16,9 +16,9 @@ Etape1_traitement_initial <- function(path) {
 
   # 2. Vérification des identifiants
   cat("Nombre d'observations :", nrow(data), "\n")
-  cat("Ménages uniques (Interview_key) :", n_distinct(data[[1]])), "\n")
-  cat("Duplications :", sum(duplicated(data[[1]]))), "\n")
-  cat("Manquants :", sum(is.na(data[[1]]))), "\n")
+  cat("Ménages uniques (Interview_key) :", n_distinct(data[[1]]), "\n")
+  cat("Duplications :", sum(duplicated(data[[1]]), "\n"))
+  cat("Manquants :", sum(is.na(data[[1]]), "\n"))
 
   # 3. Renommage
   data <- data %>%
