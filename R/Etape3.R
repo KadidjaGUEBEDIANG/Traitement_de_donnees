@@ -59,8 +59,8 @@ Etape3_conversion_standardisation <- function(
   Base_X1_SemiApurée <- baseVUmenage %>%
     left_join(df_merge, by = c("menage", "produit", "Unité", "Taille"))
 
-  # Ajout des IDs interview__id
-  Base_X1_SemiApurée$IDs <- data$interview__id
+  # Ajout des IDs !!sym(names(data)[2])
+  Base_X1_SemiApurée$IDs <- data$!!sym(names(data)[2])
 
   # Réorganisation des colonnes
   Base_X1_SemiApurée <- Base_X1_SemiApurée %>%
