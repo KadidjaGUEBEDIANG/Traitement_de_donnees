@@ -90,7 +90,7 @@ Etape4_nettoyage_validation <- function(
     arrange(desc(nb_outliers_inf + nb_outliers_sup))
 
   # 4.2 Validation par les Kilocalories
-  calorie_conversion <- read_dta(calorie)) %>%
+  calorie_conversion <- calorie %>%
     select(produit = codpr, cal)
 
   Base_X1_SemiApurée <- Base_X1_SemiApurée %>%
