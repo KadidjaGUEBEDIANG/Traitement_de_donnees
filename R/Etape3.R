@@ -24,7 +24,7 @@ Etape3_conversion_standardisation <- function(
   library(readxl)
 
   # Charger la table de conversion
-  df_conv <- chemin_conversion
+  df_conv <- read_excel(chemin_conversion)
 
   # Merge avec la table conversion
   df_merge <- data %>%
@@ -59,8 +59,8 @@ Etape3_conversion_standardisation <- function(
   Base_X1_SemiApurée <- baseVUmenage %>%
     left_join(df_merge, by = c("menage", "produit", "Unité", "Taille"))
 
-  # Ajout des IDs !!sym(names(data)[2])
-  Base_X1_SemiApurée$IDs <- data$!!sym(names(data)[2])
+  # Ajout des IDs interview__id
+  Base_X1_SemiApurée$IDs <- data$interview__id
 
   # Réorganisation des colonnes
   Base_X1_SemiApurée <- Base_X1_SemiApurée %>%
@@ -71,5 +71,4 @@ Etape3_conversion_standardisation <- function(
 
   return(Base_X1_SemiApurée)
 }
-
 

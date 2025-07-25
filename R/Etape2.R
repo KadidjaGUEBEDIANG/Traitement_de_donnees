@@ -127,7 +127,7 @@ Etape2_analyse_valeurs_unitaires_et_sources <- function(data) {
     )
 
   baseVUmenage <- left_join(baseVUmenage, baseVUmenage1,
-                           by = c("menage", "produit", "Unité", "Taille")
+                            by = c("menage", "produit", "Unité", "Taille")
   )
 
   return(baseVUmenage)

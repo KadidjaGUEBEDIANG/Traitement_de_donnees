@@ -4,8 +4,7 @@
 #' et l’ajout des informations géographiques et démographiques.
 #'
 #' @param Base_X1_SemiApurée Dataframe semi-apuré avec quantités et valeurs.
-#' @param calorie, fichier contenant les calories.
-#' @param membres, fichier contenant les individus
+#' @param mon_path, Chemin du dossier contenant les fichiers de données annexes.
 #' @param data_principal, Chemin du dossier contenant les fichiers de données annexes.
 #' @param ehcvm_all, Chemin du dossier contenant les fichiers de données annexes
 #' @return Dataframe nettoyée et enrichie prête pour analyse.
@@ -15,9 +14,8 @@
 
 Etape4_nettoyage_validation <- function(
     Base_X1_SemiApurée,  # base issue des étapes précédentes
-    data_principal,      # base initial,e data_principal, pour les NA et variables source etc.
-    membres,
-    calorie,            # fichiers externes
+    data_principal,      # base initiale data_principal, pour les NA et variables source etc.
+    mon_path,            # chemin vers dossier contenant fichiers externes
     ehcvm_all            # dataframe ehcvm pour enrichissement géographique
 ) {
   library(dplyr)
@@ -91,7 +89,7 @@ Etape4_nettoyage_validation <- function(
     arrange(desc(nb_outliers_inf + nb_outliers_sup))
 
   # 4.2 Validation par les Kilocalories
-  calorie_conversion <- calorie %>%
+  calorie_conversion <- read_dta(file.path(mon_path, "calorie_conversion_tgo2021.dta")) %>%
     select(produit = codpr, cal)
 
   Base_X1_SemiApurée <- Base_X1_SemiApurée %>%
@@ -100,8 +98,8 @@ Etape4_nettoyage_validation <- function(
     select(-cal)
 
   # Taille du ménage
-  membres <- read_dta(membres))
-  names(membres)[2] <- "IDs"
+  membres <- read_dta(file.path(mon_path, "S00_S01_membres.dta"))
+  names(membres)[names(membres) == "interview__id"] <- "IDs"
   membres <- membres %>%
     group_by(IDs) %>%
     summarise(Taille_Menage = n(), .groups = "drop")
@@ -116,7 +114,7 @@ Etape4_nettoyage_validation <- function(
   # 4.3 Enrichissement géographique avec ehcvm_all
   adresse <- ehcvm_all %>%
     select(
-      IDs = !!sym(names(data)[2]),
+      IDs = interview__id,
       département = s00q02,
       région = s00q01,
       milieu = s00q04
@@ -130,7 +128,7 @@ Etape4_nettoyage_validation <- function(
 
   # Retourner liste avec résultats (la base finale et les tables outliers pour analyse)
   return(
-   Base_X1_Apurée
+    Base_X1_Apurée
 
   )
 }

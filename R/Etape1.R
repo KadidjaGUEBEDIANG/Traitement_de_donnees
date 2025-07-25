@@ -16,25 +16,25 @@ Etape1_traitement_initial <- function(path) {
 
   # 2. Vérification des identifiants
   cat("Nombre d'observations :", nrow(data), "\n")
-  cat("Ménages uniques (Interview_key) :", n_distinct(data[[1]]), "\n")
-  cat("Duplications :", sum(duplicated(data[[1]]), "\n"))
-  cat("Manquants :", sum(is.na(data[[1]]), "\n"))
+  cat("Ménages uniques (interview__key) :", n_distinct(data$interview__key), "\n")
+  cat("Duplications :", sum(duplicated(data$interview__key)), "\n")
+  cat("Manquants :", sum(is.na(data$interview__key)), "\n")
 
   # 3. Renommage
   data <- data %>%
     rename(
-      menage = !!sym(names(data)[2]),
+      menage = interview__key,
       produit = !!sym(names(data)[3]),
-      quantite_consommee = !!sym(names(data)[4]),
-      unite = !!sym(names(data)[5]),
-      taille = !!sym(names(data)[6]),
-      qte_autoconsommee = !!sym(names(data)[7]),
-      qte_recue = !!sym(names(data)[8]),
-      date_dernier_achat = !!sym(names(data)[9]),
-      qte_dernier_achat = !!sym(names(data)[10]),
-      unite_dernier_achat = !!sym(names(data)[11]),
-      taille_dernier_achat = !!sym(names(data)[12]),
-      valeur_dernier_achat = !!sym(names(data)[13])
+      quantite_consommee = !!sym(names(data)[5]),
+      unite = !!sym(names(data)[6]),
+      taille = !!sym(names(data)[7]),
+      qte_autoconsommee = !!sym(names(data)[8]),
+      qte_recue = !!sym(names(data)[9]),
+      date_dernier_achat = !!sym(names(data)[10]),
+      qte_dernier_achat = !!sym(names(data)[11]),
+      unite_dernier_achat = !!sym(names(data)[12]),
+      taille_dernier_achat = !!sym(names(data)[13]),
+      valeur_dernier_achat = !!sym(names(data)[14])
     )
 
 
