@@ -24,7 +24,7 @@ Etape3_conversion_standardisation <- function(
   library(readxl)
 
   # Charger la table de conversion
-  df_conv <- read_excel(chemin_conversion)
+  df_conv <- chemin_conversion
 
   # Merge avec la table conversion
   df_merge <- data %>%
