@@ -15,7 +15,8 @@
 
 Etape4_nettoyage_validation <- function(
     Base_X1_SemiApurée,  # base issue des étapes précédentes
-    data_principal,      # base initiale data_principal, pour les NA et variables source etc.
+    data_principal,      # base initial,e data_principal, pour les NA et variables source etc.
+    membres,
     calorie,            # fichiers externes
     ehcvm_all            # dataframe ehcvm pour enrichissement géographique
 ) {
